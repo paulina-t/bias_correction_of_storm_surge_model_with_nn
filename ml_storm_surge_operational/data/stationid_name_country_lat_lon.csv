@@ -1,0 +1,107 @@
+station,stationid,name,country,latitude,longitude
+0,DE_AlteWeser                        ,AlteWeser,Germany,53.86,8.13
+1,DE_Eider                            ,Eider,Germany,54.27,8.84
+2,DE_Husum                            ,Husum,Germany,54.47,9.02
+3,DE_Wittduen                         ,Wittduen,Germany,54.63,8.38
+4,DE_Buesum                           ,Buesum,Germany,54.12,8.86
+5,DE_Helgoland                        ,Helgoland,Germany,54.18,7.89
+6,DE_Norderney                        ,Norderney,Germany,53.7,7.16
+7,DE_Cuxhaven                         ,Cuxhaven,Germany,53.87,8.72
+8,DE_Hoernum                          ,Hoernum,Germany,54.76,8.3
+9,DE_Wangerooge                       ,Wangerooge,Germany,53.81,7.93
+10,NL_Amelander Westgat platform       ,Amelander Westgat platform,Netherlands,53.49,5.94
+11,NL_Aukfield platform                ,Aukfield platform,Netherlands,56.4,2.06
+12,NL_Brouwershavensche Gat 08         ,Brouwershavensche Gat 08,Netherlands,51.75,3.81
+13,"NL_Brouwershavensche Gat, punt 02   ","Brouwershavensche Gat, punt 02",Netherlands,51.77,3.62
+14,NL_Cadzand                          ,Cadzand,Netherlands,51.38,3.38
+15,NL_Delfzijl                         ,Delfzijl,Netherlands,53.33,6.93
+16,NL_Den Helder                       ,Den Helder,Netherlands,52.96,4.74
+17,NL_Engelsmanplaat noord             ,Engelsmanplaat noord,Netherlands,53.46,6.05
+18,NL_Euro platform                    ,Euro platform,Netherlands,52.0,3.28
+19,NL_F3 platform                      ,F3 platform,Netherlands,54.85,4.73
+20,NL_Haringvliet 10                   ,Haringvliet 10,Netherlands,51.86,3.86
+21,NL_Haringvlietmond                  ,Haringvlietmond,Netherlands,51.9,3.93
+22,NL_Harlingen                        ,Harlingen,Netherlands,53.18,5.41
+23,NL_Holwerd                          ,Holwerd,Netherlands,53.4,5.88
+24,NL_Horsborngat                      ,Horsborngat,Netherlands,53.57,6.61
+25,NL_Huibertgat                       ,Huibertgat,Netherlands,53.57,6.4
+26,NL_IJmuiden stroommeetpaal          ,IJmuiden stroommeetpaal,Netherlands,52.46,4.52
+27,NL_K13a platform                    ,K13a platform,Netherlands,53.22,3.22
+28,NL_K14 platform                     ,K14 platform,Netherlands,53.27,3.63
+29,NL_L9 platform                      ,L9 platform,Netherlands,53.62,4.97
+30,NL_Lauwersoog                       ,Lauwersoog,Netherlands,53.41,6.2
+31,NL_Lichteiland Goeree               ,Lichteiland Goeree,Netherlands,51.93,3.67
+32,NL_Maasmond stroommeetpaal          ,Maasmond stroommeetpaal,Netherlands,51.99,4.01
+33,NL_Nes                              ,Nes,Netherlands,53.43,5.76
+34,NL_Noordwijk meetpost               ,Noordwijk meetpost,Netherlands,52.27,4.29
+35,NL_North Cormorant                  ,North Cormorant,Netherlands,61.24,1.15
+36,NL_Oosterschelde 11                 ,Oosterschelde 11,Netherlands,51.64,3.48
+37,NL_Oosterschelde 13                 ,Oosterschelde 13,Netherlands,51.73,3.55
+38,NL_Oosterschelde 14                 ,Oosterschelde 14,Netherlands,51.72,3.68
+39,NL_Oosterschelde 15                 ,Oosterschelde 15,Netherlands,51.58,3.47
+40,NL_Oudeschild                       ,Oudeschild,Netherlands,53.04,4.85
+41,NL_Platform A12                     ,Platform A12,Netherlands,55.38,3.8
+42,NL_Platform D15-A                   ,Platform D15-A,Netherlands,54.33,2.94
+43,NL_Platform F16-A                   ,Platform F16-A,Netherlands,54.12,4.01
+44,NL_Platform Hoorn Q1-A              ,Platform Hoorn Q1-A,Netherlands,52.93,4.15
+45,NL_Platform J6                      ,Platform J6,Netherlands,53.82,2.95
+46,NL_Schiermonnikoog                  ,Schiermonnikoog,Netherlands,53.47,6.2
+47,NL_Terschelling Noordzee            ,Terschelling Noordzee,Netherlands,53.44,5.33
+48,NL_Texel Noordzee                   ,Texel Noordzee,Netherlands,53.12,4.73
+49,NL_Vlakte van de Raan               ,Vlakte van de Raan,Netherlands,51.5,3.24
+50,NL_Vlieland haven                   ,Vlieland haven,Netherlands,53.3,5.09
+51,NL_West-Terschelling                ,West-Terschelling,Netherlands,53.36,5.22
+52,NL_Westkapelle                      ,Westkapelle,Netherlands,51.52,3.44
+53,NL_Wierumergronden                  ,Wierumergronden,Netherlands,53.52,5.96
+54,WL_draugen                          ,Draugen,Norway (Water Level),64.35,7.78
+55,WL_ekofisk                          ,EkofiskL,Norway (Water Level),56.5,3.2
+56,WL_heidrun                          ,Heidrun,Norway (Water Level),65.33,7.33
+57,WL_heimdal                          ,Heimdal,Norway (Water Level),59.57,2.24
+58,WL_sleipner                         ,Sleipner,Norway (Water Level),58.37,1.91
+59,WL_veslefrikk                       ,Veslefrikk,Norway (Water Level),60.77,2.88
+60,DK_4203                             ,Thyboroen Havet,Denmark,56.71,8.21
+61,DK_4201                             ,Thyboroen Havn,Denmark,56.71,8.22
+62,DK_4303                             ,Ferring Havet,Denmark,56.52,8.12
+63,DK_5103                             ,Thorsminde Havet (flyder),Denmark,56.37,8.11
+64,DK_5104                             ,Thorsminde Havet (tryk),Denmark,56.37,8.11
+65,DK_5203                             ,Hvide Sande Havet,Denmark,56.0,8.11
+66,DK_7101                             ,Manoe (flyder),Denmark,55.28,8.57
+67,DK_7102                             ,Manoe (tryk),Denmark,55.28,8.57
+68,DK_6401                             ,Esbjerg,Denmark,55.47,8.42
+69,DK_6501                             ,Hoejer,Denmark,54.96,8.66
+70,NO_AES                              ,Aalesund,Norway,62.47,6.15
+71,NO_ANX                              ,Andenes,Norway,69.33,16.13
+72,NO_BGO                              ,Bergen,Norway,60.4,5.32
+73,NO_BOO                              ,Bodoe,Norway,67.29,14.4
+74,NO_HAR                              ,Harstad,Norway,68.8,16.55
+75,NO_HEI                              ,Heimsjoe,Norway,63.43,9.1
+76,NO_HFT                              ,Hammerfest,Norway,70.66,23.68
+77,NO_HRO                              ,Helgeroa,Norway,59.0,9.86
+78,NO_HVG                              ,Honningsvaag,Norway,70.98,25.97
+79,NO_KAB                              ,Kabelvaag,Norway,68.21,14.48
+80,NO_KSU                              ,Kristiansund,Norway,63.11,7.73
+81,NO_MAY                              ,Maaloey,Norway,61.93,5.11
+82,NO_MSU                              ,Mausund,Norway,63.87,8.67
+83,NO_NVK                              ,Narvik,Norway,68.43,17.43
+84,NO_NYA                              ,Ny-Aalesund,Norway,78.93,11.94
+85,NO_OSC                              ,Oscarsborg,Norway,59.68,10.6
+86,NO_OSL                              ,Oslo,Norway,59.91,10.73
+87,NO_RVK                              ,Roervik,Norway,64.86,11.23
+88,NO_SVG                              ,Stavanger,Norway,58.97,5.73
+89,NO_TOS                              ,Tromsoe,Norway,69.65,18.95
+90,NO_TRD                              ,Trondheim,Norway,63.44,10.39
+91,NO_TRG                              ,Tregde,Norway,58.01,7.55
+92,NO_VAW                              ,Vardoe,Norway,70.37,31.1
+93,NO_VIK                              ,Viker,Norway,59.04,10.95
+94,SW_2130                             ,2130,Sweden,59.0,11.13
+95,SW_2109                             ,2109,Sweden,57.68,11.79
+96,SW_2111                             ,2111,Sweden,58.35,11.22
+97,SW_35104                            ,35104,Sweden,57.89,11.57
+98,SW_35144                            ,35144,Sweden,57.63,11.61
+99,UK_Sheerness                        ,Sheerness,United Kingdom,51.44,0.74
+100,UK_Aberdeen                         ,Aberdeen,United Kingdom,57.14,-2.08
+101,UK_Whitby                           ,Whitby,United Kingdom,54.49,-0.61
+102,UK_Lerwick                          ,Lerwick,United Kingdom,60.15,-1.14
+103,UK_Newhaven                         ,Newhaven,United Kingdom,50.78,0.06
+104,UK_Lowestoft                        ,Lowestoft,United Kingdom,52.47,1.75
+105,UK_Wick                             ,Wick,United Kingdom,58.44,-3.09

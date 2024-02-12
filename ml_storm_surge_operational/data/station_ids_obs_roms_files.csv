@@ -1,0 +1,107 @@
+station_nr,station_name
+0,DE_AlteWeser
+1,DE_Eider
+2,DE_Husum
+3,DE_Wittduen
+4,DE_Buesum
+5,DE_Helgoland
+6,DE_Norderney
+7,DE_Cuxhaven
+8,DE_Hoernum
+9,DE_Wangerooge
+10,NL_Amelander Westgat platform
+11,NL_Aukfield platform
+12,NL_Brouwershavensche Gat 08
+13,"NL_Brouwershavensche Gat, punt 02"
+14,NL_Cadzand
+15,NL_Delfzijl
+16,NL_Den Helder
+17,NL_Engelsmanplaat noord
+18,NL_Euro platform
+19,NL_F3 platform
+20,NL_Haringvliet 10
+21,NL_Haringvlietmond
+22,NL_Harlingen
+23,NL_Holwerd
+24,NL_Horsborngat
+25,NL_Huibertgat
+26,NL_IJmuiden stroommeetpaal
+27,NL_K13a platform
+28,NL_K14 platform
+29,NL_L9 platform
+30,NL_Lauwersoog
+31,NL_Lichteiland Goeree
+32,NL_Maasmond stroommeetpaal
+33,NL_Nes
+34,NL_Noordwijk meetpost
+35,NL_North Cormorant
+36,NL_Oosterschelde 11
+37,NL_Oosterschelde 13
+38,NL_Oosterschelde 14
+39,NL_Oosterschelde 15
+40,NL_Oudeschild
+41,NL_Platform A12
+42,NL_Platform D15-A
+43,NL_Platform F16-A
+44,NL_Platform Hoorn Q1-A
+45,NL_Platform J6
+46,NL_Schiermonnikoog
+47,NL_Terschelling Noordzee
+48,NL_Texel Noordzee
+49,NL_Vlakte van de Raan
+50,NL_Vlieland haven
+51,NL_West-Terschelling
+52,NL_Westkapelle
+53,NL_Wierumergronden
+54,WL_draugen
+55,WL_ekofisk
+56,WL_heidrun
+57,WL_heimdal
+58,WL_sleipner
+59,WL_veslefrikk
+60,DK_4203
+61,DK_4201
+62,DK_4303
+63,DK_5103
+64,DK_5104
+65,DK_5203
+66,DK_7101
+67,DK_7102
+68,DK_6401
+69,DK_6501
+70,NO_AES
+71,NO_ANX
+72,NO_BGO
+73,NO_BOO
+74,NO_HAR
+75,NO_HEI
+76,NO_HFT
+77,NO_HRO
+78,NO_HVG
+79,NO_KAB
+80,NO_KSU
+81,NO_MAY
+82,NO_MSU
+83,NO_NVK
+84,NO_NYA
+85,NO_OSC
+86,NO_OSL
+87,NO_RVK
+88,NO_SVG
+89,NO_TOS
+90,NO_TRD
+91,NO_TRG
+92,NO_VAW
+93,NO_VIK
+94,SW_2130
+95,SW_2109
+96,SW_2111
+97,SW_35104
+98,SW_35144
+99,UK_Sheerness
+100,UK_Aberdeen
+101,UK_Whitby
+102,UK_Lerwick
+103,UK_Newhaven
+104,UK_Lowestoft
+105,UK_Wick

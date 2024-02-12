@@ -1,0 +1,4 @@
+python3: can't open file '/home/paulinast/repos/github/ml_storm_surge_operational/storm_surge_oper/main_predict.py': [Errno 2] No such file or directory
+Command exited with non-zero status 2
+0.02user 0.01system 0:00.06elapsed 47%CPU (0avgtext+0avgdata 8688maxresident)k
+7240inputs+8outputs (18major+1180minor)pagefaults 0swaps
