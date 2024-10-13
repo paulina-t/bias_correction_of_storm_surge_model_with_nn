@@ -583,7 +583,7 @@ class EDA():
     
     def radial_plot_data(self, function_name,  var1, var2='', 
                         radial_coord_name='wind_speed', angular_coord_name='wind_dir',
-                        h=0, min_obs_bin=1, round_rho_val=1, round_theta_val=10):
+                        h=0, min_obs_bin=1):
         """Generate radial plot data.
         
         Generates and saves radial plot figures (pcolor in polar coordinates), 
@@ -614,10 +614,7 @@ class EDA():
         -------
         None.
 
-        """   
-        
-        self.round_theta_val = round_theta_val
-        
+        """        
         # Define bins (round values)
         rho_name = radial_coord_name + '_bin_' + self.station
         theta_name = angular_coord_name + '_bin_' + self.station
@@ -627,24 +624,18 @@ class EDA():
         #    print(c)
             
         # Rho (wind speed)
-        self.df_station[rho_name] = np.ceil(
-            ( 
-                self.df_station[radial_coord_name + '_' + self.station]
-                .shift(-h)
-                / round_rho_val
-                )           
-            ) * round_rho_val
-        
+        self.df_station[rho_name] = np.round(
+            self.df_station[radial_coord_name + '_' + self.station]
+            .shift(-h)
+            )
         # Theta (wind dir)
-        self.df_station[theta_name] = np.ceil(
+        self.df_station[theta_name] = np.round(
             (
                 self.df_station[angular_coord_name + '_' + self.station]
                 .shift(-h) 
-                / round_theta_val
+                / 10
                 ) 
-            ) * round_theta_val
-        
-            
+            )*10
         
         if h > 0:
             var1_h = var1 + '_t' + str(h)
@@ -704,26 +695,8 @@ class EDA():
             # Construct 2D arrays
             unique_directions = np.radians(aggregated_df.index.unique(level=theta_name))
             unique_speeds = aggregated_df.index.unique(level=rho_name)
-            print('unique_directions: ', unique_directions)
-            print('len(unique_directions): ', len(unique_directions))
-            
-            # Divede into more bins so that they do not look curved
-            # Since we rounded the values with the function ceil, the bin involves all the values lower that the bin edge
-            subdivs = 10
-            unique_directions_high_res = np.linspace(
-                -np.pi,# + np.radians(round_theta_val), 
-                np.pi,# + np.radians(round_theta_val), 
-                (len(unique_directions)) * subdivs 
-                )
-            print('unique_directions_high_res: ', unique_directions_high_res)
-            
-            print('np.radians(self.round_theta_val/(subdivs*2.)): ',np.radians(self.round_theta_val/(subdivs*2.)))
-            theta, rho = np.meshgrid(
-                unique_directions_high_res, # + np.radians(self.round_theta_val/(subdivs*2.)), # Add an offset so that the bin coincides with the grid
-                unique_speeds - (unique_speeds[1] - unique_speeds[0])/2
-                )
+            theta, rho = np.meshgrid(unique_directions, unique_speeds)
             c = aggregated_df.unstack(0).to_numpy()
-            c = np.repeat(c, subdivs, axis=0)
         else:
             print('Aggregated df is empty.')
             c = None
@@ -769,9 +742,7 @@ class EDA():
         return var_str
         
     
-    def radial_plot(self, c, theta, rho, function_name, var1, var2='', vmax=None, vmin=None, 
-                    path=None, h=0, m=None, cbar_label='', xticks=np.zeros(0), yticks=np.zeros(0),
-                    add_colorbar=True, cmap='', title=''):
+    def radial_plot(self, c, theta, rho, function_name, var1, var2='', vmax=None, vmin=None, path=None, h=0, m=None):
         """Make radial plots.
         
         Plot the data generated with the function radialplot_data.
@@ -798,7 +769,7 @@ class EDA():
         -------
         None.
         """
-
+ 
         m_str = ''
         if type(m)==int:
             if (m>=0) and (m<51):
@@ -810,70 +781,40 @@ class EDA():
         if h>0:
             h_str = 'Lead time: ' + str(h)
             
-        abs_max = np.abs(np.max(np.nanquantile(c, 0.95)))
-        abs_min = np.abs(np.min(np.nanquantile(c, 0.05)))
-        if (not vmax) and (vmax != 0):
-            print('Computing vmax...')
-            vmax = max(abs_max, abs_min)
-        if (not vmin) and (vmin != 0):
-            print('Computing vmin...')
-            vmin = -max(abs_max, abs_min)
-        
-        print('c.shape: ', c.shape)
-        print('theta.shape: ', theta.shape)
         var_str = self.make_var_str(var1, var2)
-        if not cbar_label:
-            cbar_label = function_name + var_str + ' [m]'
+        cbar_label = function_name + var_str + ' [m]'
         fig, ax = plt.subplots(subplot_kw={"projection":"polar"})
         if function_name == 'corr':
-            if not cmap:
-                cmap = plt.get_cmap('Spectral_r')
-                cmap.set_bad(color = 'w', alpha = 0)
+            cmap = plt.get_cmap('Spectral_r')
+            cmap.set_bad(color = 'w', alpha = 0)
             p = ax.pcolormesh(theta, rho, c, cmap=cmap, vmin=-1, vmax=1)
+            cb = fig.colorbar(p)
+            cb.set_label(cbar_label)
         elif function_name == 'mean':
-            if not cmap:
-                cmap = plt.get_cmap('Spectral')
-                cmap.set_bad(color = 'w', alpha = 0)
-            p = ax.pcolormesh(theta, rho, c, cmap=cmap, vmin=vmin, vmax=vmax)
+            abs_max = np.abs(np.max(np.nanquantile(c, 0.95)))
+            abs_min = np.abs(np.min(np.nanquantile(c, 0.05)))
+            if not vmax:
+                vmax = max(abs_max, abs_min)
+            if not vmin:
+                vmin = -vmax
+            cmap = plt.get_cmap('Spectral_r')
+            cmap.set_bad(color = 'w', alpha = 0)
+            p = ax.pcolormesh(theta, rho, c, cmap=cmap,vmin=vmin, vmax=vmax)
+            cb = fig.colorbar(p)
+            cb.set_label(cbar_label)
         elif function_name == 'std' or function_name == 'rmse':
-            if not cmap:
-                cmap = 'viridis_r'
-            p = ax.pcolormesh(theta, rho, c, cmap=cmap, vmin=vmin, vmax=vmax)
+            p = ax.pcolormesh(theta, rho, c, cmap='viridis_r')
+            cb = fig.colorbar(p)
+            cb.set_label(cbar_label)
         else:
-            if not cmap:
-                cmap = 'viridis_r'
-            p = ax.pcolormesh(theta, rho, c, cmap=cmap, vmin=vmin, vmax=vmax)
+            p = ax.pcolormesh(theta, rho, c, cmap='viridis_r')
+            cb = fig.colorbar(p)
+            cb.set_label(cbar_label)
             
-        if add_colorbar:
-            cb = fig.colorbar(p, pad=0.1)
-            cb.set_label(cbar_label, fontsize=18)
-            cb.ax.tick_params(labelsize=14)
-        
         #ax.set_title(self.station + ' ' + self.coord_str + '\n' + m_str + ' ' + h_str)
-        if title:
-            ax.set_title(title)
         ax.set_theta_zero_location("N")
         ax.set_theta_direction(-1)
         ax.set_rlabel_position(135)
-        #ax.set_theta_offset(np.deg2rad(self.round_theta_val/2))
-        
-        
-        #grid_points = list(np.arange(0, 360, self.round_theta_val))
-        if len(xticks) <= 1:
-            xticks = np.arange(0, 2*np.pi, np.radians(self.round_theta_val))
-            
-        if len(yticks) <= 1:
-            yticks = np.arange(0, np.max(np.max(rho)), rho[0, 1] - rho[0, 0])
-            
-            
-        ax.set_xticks(xticks, fontsize=14)
-        print('np.max(np.max(rho)): ', np.max(np.max(rho)))
-        print('rho[0, 0] - rho[0, 1]: ', rho[0, 0] - rho[0, 1])
-        ax.set_yticks(yticks, fontsize=14)
-        ax.tick_params(labelsize=14)
-        ax.grid()
-        
-        plt.tight_layout()
         
         if path:
             print('Saving polar plots...')
