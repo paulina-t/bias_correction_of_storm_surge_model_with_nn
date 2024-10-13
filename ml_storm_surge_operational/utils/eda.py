@@ -11,9 +11,9 @@ from scipy import stats
 import warnings
 import xarray as xr
 #import cartopy.crs as ccrs
-import ml_models.utils.helpers as hlp
-from ml_models.data_loader.read_kyststasjoner import ReadKyststasjoner
-from ml_models.data_loader.prepare_df import PrepareDataFrames 
+import ml_storm_surge_operational.utils.helpers as hlp
+from ml_storm_surge_operational.data_loader.read_kyststasjoner import ReadKyststasjoner
+from ml_storm_surge_operational.data_loader.prepare_df import PrepareDataFrames 
 
 import os
 import time
