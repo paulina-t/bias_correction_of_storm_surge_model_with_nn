@@ -4,8 +4,8 @@ import datetime as dt
 import pickle 
 import lzma
 
-from ml_models.data_loader.prepare_df import PrepareDataFrames 
-import ml_models.utils.helpers as hlp
+from ml_storm_surge_operational.data_loader.prepare_df import PrepareDataFrames 
+import ml_storm_surge_operational.utils.helpers as hlp
 
 print("Put the interpreter in UTC, to make sure no TZ issues...")
 os.environ["TZ"] = "UTC"

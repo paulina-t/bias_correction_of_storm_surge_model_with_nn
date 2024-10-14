@@ -9,8 +9,8 @@ import gc
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
-from ml_models.data_loader.preprocessor_new_version_2 import PreprocessInput
-import ml_models.utils.helpers as hlp
+from ml_storm_surge_operational.data_loader.preprocessor_new_version_2 import PreprocessInput
+import ml_storm_surge_operational.utils.helpers as hlp
 
 import tensorflow
 
@@ -44,7 +44,7 @@ def reset_keras(model):
         tensorflow.compat.v1.Session(config=config)
         )
     
-import ml_models.utils.helpers as hlp
+import ml_storm_surge_operational.utils.helpers as hlp
 
 def generate_indices(pp, len_past_features):
     """Define different indices for subsetting the featurure DataFrame. Not 

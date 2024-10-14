@@ -178,7 +178,7 @@ class PrepareDataFrames():
             self.aux_variables.append('tide_py')
             self.aux_variables.append('stormsurge_corrected')
             self.aux_variables.append('(obs - tide_py)')
-         if 'wind_speed' in self.variables or 'wind_dir' in self.variables:
+        if 'wind_speed' in self.variables or 'wind_dir' in self.variables:
             self.aux_variables.append('u10')
             self.aux_variables.append('v10')
         if 'stormsurge - (obs - tide_py)' in self.variables:
@@ -327,6 +327,13 @@ class PrepareDataFrames():
                 dfs.append(df_stormsurge_obs_tide)
                 print('Added stormsurge - (obs-tide) data.')
 
+        df_wind_vars = list(
+                set.intersection(
+                    set(self.wind_vars), 
+                    set(list_all_variables)
+                    )
+                )
+
         if df_wind_vars:
             dfs.append(self.add_wind_speed_and_direction_vars())
             print('Added wind data: ')
@@ -376,7 +383,7 @@ class PrepareDataFrames():
             DataFrame with wind speed and/or wind direction columns.
 
         """
-        if self.use_station_data:
+        if True:#self.use_station_data:
             u_var = 'u10'
             v_var = 'v10'
         else:

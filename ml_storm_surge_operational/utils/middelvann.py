@@ -12,7 +12,7 @@ The mean levels are available at:
 https://projects.met.no/vannstandshendelser/230319_prog-3/
 """
   
-from ml_models.utils import assertions  as asrt   
+from ml_storm_surge_operational.utils import assertions  as asrt   
 
 def add_mean_water_level_values(station_id: str, x):
     """Add mean water level.

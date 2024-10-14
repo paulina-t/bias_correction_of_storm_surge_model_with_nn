@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 plt.switch_backend('agg')
-import seaborn as sns
+# import seaborn as sns
 from scipy.stats import norm
 from scipy import stats
 import warnings
@@ -13,7 +13,7 @@ import xarray as xr
 #import cartopy.crs as ccrs
 import ml_storm_surge_operational.utils.helpers as hlp
 from ml_storm_surge_operational.data_loader.read_kyststasjoner import ReadKyststasjoner
-from ml_storm_surge_operational.data_loader.prepare_df import PrepareDataFrames 
+from ml_storm_surge_operational.data_loader.prepare_df_operational import PrepareDataFrames 
 
 import os
 import time
@@ -1334,7 +1334,7 @@ if __name__ == '__main__':
     import os
     sys.path.insert(1, os.path.join(sys.path[0], '..'))
     sys.path.insert(2, os.path.join(sys.path[1], '..'))
-    #from ml_models.data_loader.preprocessor import PreprocessInput
+    #from ml_storm_surge_operational.data_loader.preprocessor import PreprocessInput
     
     # data_dir = '../figures/eda'
     data_dir = (
