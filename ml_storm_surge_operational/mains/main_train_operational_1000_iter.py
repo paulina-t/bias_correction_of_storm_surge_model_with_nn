@@ -7,7 +7,7 @@ Not needed in an operational context.
 import numpy as np
 from multiprocessing import Pool
 
-from ml_models.models.operational_5_stations import main_train_model
+from ml_storm_surge_operational.models.operational_5_stations import main_train_model
 
 #i = np.arange(10)
 #n_processes = len(i)
