@@ -143,6 +143,14 @@ class PrepareDataFrames():
             'swh', 
             'mwd'
             ] 
+        self.wind_vars = [
+            'wind_speed', 
+            'wind_dir'
+        ]
+        self.wind_arome_vars = [
+            'wind_speed_arome', 
+            'wind_dir_arome'
+        ]
 
         # Get a list of the auxiliary variables needed
         self.create_aux_variables_list()
@@ -170,6 +178,9 @@ class PrepareDataFrames():
             self.aux_variables.append('tide_py')
             self.aux_variables.append('stormsurge_corrected')
             self.aux_variables.append('(obs - tide_py)')
+         if 'wind_speed' in self.variables or 'wind_dir' in self.variables:
+            self.aux_variables.append('u10')
+            self.aux_variables.append('v10')
         if 'stormsurge - (obs - tide_py)' in self.variables:
             self.aux_variables.append('obs')
             self.aux_variables.append('tide_py')
@@ -178,6 +189,13 @@ class PrepareDataFrames():
         if '(obs - tide_py)' in self.aux_variables:
             self.aux_variables.append('obs')
             self.aux_variables.append('tide_py')
+        if ('wind_speed' or 'wind_dir') in self.variables:
+            if self.station_forcing_vars:
+                self.aux_variables.append('u10')
+                self.aux_variables.append('v10')
+            else:
+                self.aux_variables.append('x_wind_10m')
+                self.aux_variables.append('y_wind_10m')
         
     def operational_stations(self):
         """Provides only the Norwegian stations in self.stations"""
@@ -309,6 +327,11 @@ class PrepareDataFrames():
                 dfs.append(df_stormsurge_obs_tide)
                 print('Added stormsurge - (obs-tide) data.')
 
+        if df_wind_vars:
+            dfs.append(self.add_wind_speed_and_direction_vars())
+            print('Added wind data: ')
+            print(dfs[-1])
+
         # ----------------------------------------------------------------------
         # 1) Concatenate DataFrames in the list.
         # ----------------------------------------------------------------------
@@ -331,6 +354,54 @@ class PrepareDataFrames():
         # dows not happen in the older versions.
         df = df[~df.index.duplicated(keep='last')]
              
+        return df
+
+    def add_wind_speed_and_direction_vars(self):
+        """Compute wind speed and/or wind direction.
+        
+        For each station, compute the wind speeds and/directions if the 
+        variables 'wind_speed' or 'wind_dir' are specified as feature or label 
+        variables.
+
+        Parameters
+        ----------
+        df : DataFrame
+            DataFrame containing at least the variables 'u10' and 'v10' if 
+            using forcing at station location or 'x_wind_dir' and 'y_wind_dir'
+            if using forcing over a mesh.
+
+        Returns
+        -------
+        df : DataFrame
+            DataFrame with wind speed and/or wind direction columns.
+
+        """
+        if self.use_station_data:
+            u_var = 'u10'
+            v_var = 'v10'
+        else:
+            u_var = 'x_wind_10m'
+            v_var = 'y_wind_10m'
+                
+        df = pd.DataFrame()
+        if 'wind_speed' in self.variables:
+            print('Adding wind_speed columns...')
+            #u_var = 'u10'
+            #v_var = 'v10'
+            for station in self.stations:
+                df['wind_speed_' + station] = hlp.wind_speed(
+                    self.df_aux[u_var + '_' + station],
+                    self.df_aux[v_var + '_' + station])
+        
+        if 'wind_dir' in self.variables:
+            print('Adding wind_dir columns...')
+            #u_var = 'u10'
+            #v_var = 'v10'
+            for station in self.stations:
+                df['wind_dir_' + station] = hlp.wind_dir(
+                    self.df_aux[u_var + '_' + station],
+                    self.df_aux[v_var + '_' + station])            
+                
         return df
     
     def add_obs_tide(self, variables):
