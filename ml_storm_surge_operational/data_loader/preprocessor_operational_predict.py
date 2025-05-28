@@ -19,9 +19,14 @@ import pickle
 import warnings
 warnings.filterwarnings('ignore')
 
-from ml_storm_surge_operational.data_loader.prepare_df_operational import (
+from ml_storm_surge_operational.data_loader.prepare_df_operational_prod import (
     PrepareDataFrames 
 )
+# Change to this if not using for production:
+#from ml_storm_surge_operational.data_loader.prepare_df_operational import (
+#    PrepareDataFrames 
+#)
+
 from ml_storm_surge_operational.utils.helpers import verboseprint1, verboseprint2
 import ml_storm_surge_operational.utils.helpers as hlp
 
@@ -139,6 +144,15 @@ class PreprocessInput():
         
         verboseprint1(self.verbose, 'Preparing feature and label df...')    
         self.df_features_and_labels = prep.prepare_features_labels_df()
+        
+        # There are some NaNs in the data, so we need to replace them.
+        # A temporary solution is to replace them with the value 1.
+        # TODO: Change this to a more sophisticated method!!!!
+        self.df_features_and_labels = (
+            self.df_features_and_labels
+            .fillna(1)
+            .replace([np.inf, -np.inf], 1)
+        )
         
         self.time = self.df_features_and_labels.index
         
@@ -317,7 +331,7 @@ class PreprocessInput():
         vars_to_select =  [
             x for x in variable_names if x in self.df_features_and_labels.columns
             ]
-
+        print('vars_to_select: ', vars_to_select)
         # Subset DataFrame and convert to array
         labels = self.df_features_and_labels[vars_to_select].to_numpy()
         self.label_names = variable_names
@@ -350,6 +364,13 @@ class PreprocessInput():
         # for that record
         bool_features = ~np.isnan(features).any(axis=1)
         bool_labels = ~np.isnan(labels).any(axis=1)
+        
+        print('features: ', features)
+        print('features.shape: ', features.shape)
+        print('np.isnan(features).sum(): ',
+            np.isnan(features).sum()
+            )
+        
         
         verboseprint1(
             self.verbose, 
@@ -516,6 +537,12 @@ class PreprocessInput():
             y_train_std = b['y_train_std']
             
             # Normalize
+            print('*** self.x.shape: ', self.x.shape)
+            print('*** x_train_mean.shape: ', x_train_mean.shape)
+            print('*** x_train_std.shape: ', x_train_std.shape)
+            print('*** self.y.shape: ', self.y.shape)
+            print('*** y_train_mean.shape: ', y_train_mean.shape)
+            print('*** y_train_std.shape: ', y_train_std.shape)
             x_norm = (self.x - x_train_mean) / x_train_std
             y_norm = (self.y - y_train_mean) / y_train_std
             

@@ -27,14 +27,21 @@ def predict_residuals(datetime_predict):
     Y_test_pred = np.full([60, len(stations)], np.nan)
     count_station = 0
     # Takes a list of stations and returns the predictions for each station.
-    for station in stations:
+    for station in ['NO_OSC']: # stations:
+        print('--- station:', station)
+        # Load training data
         train_dict = load_training_data(station)
         y_train_mean = train_dict['y_train_mean']
         y_train_std = train_dict['y_train_std']
+        # Load test data
+        # Preprocess test data
+        # This function is used to get the Nordic4-SS predictions with ROMS
+        # (corrected with the sliding error method) for each station.
         test_dict = preprocess_test_data(
             station, 
             datetime_predict
             )
+        print('--- test_dict:', test_dict)
         x_test_norm = test_dict['x_norm']
         # Iterate over lead times
         for t in range(1, 61):
@@ -42,11 +49,20 @@ def predict_residuals(datetime_predict):
             # model.predict(x_test_norm) triggers a warning: 
             # https://stackoverflow.com/questions/66271988/warningtensorflow11-out-of-the-last-11-calls-to-triggered-tf-function-retracin
             y_test_norm_pred = model(x_test_norm, training=False) 
+            print('--- y_test_norm_pred.shape:' , y_test_norm_pred.shape)
+            print('--- y_train_mean[t - 1].shape:', y_train_mean[t - 1].shape)
+            print('--- y_train_std[t - 1].shape:', y_train_std[t - 1].shape)
             y_test_pred = inverse_norm(
                 x_norm=y_test_norm_pred, 
                 mu=y_train_mean[t - 1], 
                 sigma=y_train_std[t - 1]
                 )
+            print('--- y_test_pred.shape:', y_test_pred)
+            
+            print('--- y_test_norm_pred:' , y_test_norm_pred)
+            print('--- y_train_mean[t - 1]:', y_train_mean[t - 1])
+            print('--- y_train_std[t - 1]:', y_train_std[t - 1])
+            print('--- y_test_pred:' , y_test_pred)
             Y_test_pred[t-1, count_station] = y_test_pred
         count_station = count_station + 1
     return Y_test_pred
@@ -435,7 +451,7 @@ def open_kyststasjoner_and_add_correction(Y_test_pred, datetime_predict):
      Returns: 
      	 xarray dataset with stormsurge corrected ML ( same shape as Y_test_pred )
     """
-    data_dir = '/lustre/storeB/project/fou/hi/stormsurge_eps/2dEPS_archive'
+    data_dir =  '/lustre/storeB/project/metproduction/products/util/vannstand/' #'/lustre/storeB/project/fou/hi/stormsurge_eps/2dEPS_archive'
     date_str = datetime_predict.strftime('%Y%m%d%H')
     file_root_name = '/kyststasjoner_norge.nc'
     path = (
